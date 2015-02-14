@@ -34,9 +34,4 @@ def duration_to_plain_english(duration):
 tz_utils.GEOIP_DATA_LOCATION = GEOIP_DATA_LOCATION
 
 def guess_user_timezone(user_ip):
-    user_timezone_name = tz_utils.guess_timezone_by_ip(
-            ip=user_ip,
-            only_name=True
-            )
-    user_timezone = timezone(user_timezone_name)
-    return user_timezone
+    return timezone("Asia/Calcutta")
