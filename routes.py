@@ -13,7 +13,7 @@ from config import app, lm
 from database import session
 from forms import RegisterForm, LoginForm, SwitchProjectForm, HistoryDateForm
 from models import User, Project, Spell
-from utility import duration_to_plain_english, guess_user_timezone
+from utility import duration_to_plain_english, get_user_timezone
 
 
 @app.route("/")
@@ -54,7 +54,7 @@ def logout():
 @login_required
 def current():
     form = SwitchProjectForm()
-    user_timezone = guess_user_timezone(request.remote_addr)
+    user_timezone = get_user_timezone(request.remote_addr)
     current_spell = Spell.query.\
             filter(Spell.end == None).\
             join(Project).join(User).filter(User.id == current_user.id).\
@@ -129,7 +129,7 @@ def current():
 @app.route("/history", methods=["POST", "GET"])
 @login_required
 def history():
-    user_timezone = guess_user_timezone(request.remote_addr)
+    user_timezone = get_user_timezone(request.remote_addr)
     today = datetime.now(user_timezone).date()
     form = HistoryDateForm(today=today)
     sorted_durations = []
@@ -172,7 +172,7 @@ def history():
 @app.route("/user_complete_history.csv")
 @login_required
 def generate_csv():
-    user_timezone = guess_user_timezone(request.remote_addr)
+    user_timezone = get_user_timezone(request.remote_addr)
     output = StringIO()
     writer = csv.writer(output)
     DATE_FORMAT = "%c"

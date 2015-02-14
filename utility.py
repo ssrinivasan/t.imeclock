@@ -35,3 +35,9 @@ tz_utils.GEOIP_DATA_LOCATION = GEOIP_DATA_LOCATION
 
 def guess_user_timezone(user_ip):
     return timezone("Asia/Calcutta")
+
+def get_user_timezone():
+    '''
+    Permanently return Indian time zone for now
+    '''
+    return timezone("Asia/Calcutta")
