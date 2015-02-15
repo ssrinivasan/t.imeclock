@@ -220,6 +220,8 @@ def view_all_tables():
 
 
 if __name__ == "__main__":
+    #Make this file the root path of this project
     app.root_path = abspath(dirname(__file__))
+    
     app.run(debug = True)
 
