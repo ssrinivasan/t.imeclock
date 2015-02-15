@@ -6,6 +6,8 @@ import os
 import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.append(os.path.join(os.path.dirname(__file__), "..","db"))
+
 
 from flask import Flask, Response, g, redirect, render_template, request,\
         url_for
@@ -15,7 +17,7 @@ from sqlalchemy import distinct
 from os.path import abspath, dirname
 
 from config import app, lm
-from database import session
+from database import session,Base, engine
 from forms import RegisterForm, LoginForm, SwitchProjectForm, HistoryDateForm
 from models import User, Project, Spell
 from utility import duration_to_plain_english, get_user_timezone
@@ -222,6 +224,6 @@ def view_all_tables():
 if __name__ == "__main__":
     #Make this file the root path of this project
     app.root_path = abspath(dirname(__file__))
-    
+    Base.metadata.create_all(bind=engine)
     app.run(debug = True)
 
