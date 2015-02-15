@@ -63,6 +63,8 @@ class Spell(Base):
     project_id = Column(Integer, ForeignKey("projects.id"))
     start = Column(DateTime, nullable=False)
     end = Column(DateTime)
+    task_id =  Column(Integer, ForeignKey("tasks.task_id"))
+    task_description = Column(String, nullable=False)
 
     @hybrid_property
     def duration(self):
@@ -83,3 +85,17 @@ class Spell(Base):
     def __repr__(self):
         return "<Spell from {0} to {1} for project ID {2}>".\
                 format(self.start, self.end, self.project_id)
+
+class Tasks(Base):
+    __tablename__ = "tasks"
+
+    task_id = Column(Integer, primary_key=True)
+    task_name = Column(String,nullable=False)
+
+    def __init__(self, task_id,task_name):
+        self.task_id = task_id
+        self.task_name = task_name
+
+    def __repr__(self):
+        return "<Task ID {0} Task Description {1}>".\
+                format(self.task_id,self.task_name)
