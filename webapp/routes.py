@@ -2,12 +2,17 @@ import csv
 from datetime import datetime, date, timedelta
 from cStringIO import StringIO
 from operator import itemgetter
+import os
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 from flask import Flask, Response, g, redirect, render_template, request,\
         url_for
 from flask.ext.login import current_user, login_required, login_user,\
         logout_user
 from sqlalchemy import distinct
+from os.path import abspath, dirname
 
 from config import app, lm
 from database import session
@@ -215,4 +220,6 @@ def view_all_tables():
 
 
 if __name__ == "__main__":
+    app.root_path = abspath(dirname(__file__))
     app.run(debug = True)
+
