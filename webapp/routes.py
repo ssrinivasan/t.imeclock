@@ -224,6 +224,8 @@ def view_all_tables():
 if __name__ == "__main__":
     #Make this file the root path of this project
     app.root_path = abspath(dirname(__file__))
+    print 'Create the database bindings'
     Base.metadata.create_all(bind=engine)
+    print 'Finish creating database bindings'
     app.run(debug = True)
 
