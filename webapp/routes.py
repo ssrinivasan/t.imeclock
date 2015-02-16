@@ -21,6 +21,7 @@ from database import session,Base, engine
 from forms import RegisterForm, LoginForm, SwitchProjectForm, HistoryDateForm
 from models import User, Project, Spell
 from utility import duration_to_plain_english, get_user_timezone
+from db_utils import populate_tasks_table
 
 
 @app.route("/")
@@ -226,6 +227,7 @@ if __name__ == "__main__":
     app.root_path = abspath(dirname(__file__))
     print 'Create the database bindings'
     Base.metadata.create_all(bind=engine)
+    populate_tasks_table()
     print 'Finish creating database bindings'
     app.run(debug = True)
 

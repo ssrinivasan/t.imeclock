@@ -104,7 +104,7 @@ class SpellToTaskId(Base):
 
     spell_to_task_id = Column(Integer, primary_key=True)
     task_id = Column(Integer, ForeignKey("tasks.task_id"))
-    task_description = Column(String, nullable=False)
+    task_description = Column(String, nullable=True)
 
     def __init__(self,spell_to_task_id,task_id,task_description):
         self.spell_to_task_id = spell_to_task_id
